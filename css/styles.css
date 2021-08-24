@@ -199,7 +199,7 @@ input:focus,
 textarea:focus,
 button:focus,
 .button:focus,
-*[tabindex]:focus {
+*[tabindex]:not([tabindex^="-"]):focus {
   outline: 0;
   box-shadow: 0 0 2px 1.5px #fff,
               0 0 4px 3px #000 !important;
