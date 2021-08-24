@@ -195,10 +195,14 @@ fieldset {
 
 a[href]:focus,
 input:focus,
-textarea:focus {
+.input:focus,
+textarea:focus,
+button:focus,
+.button:focus,
+*[tabindex]:focus {
   outline: 0;
   box-shadow: 0 0 2px 1.5px #fff,
-              0 0 3px 3px #000;
+              0 0 4px 3px #000 !important;
 }
 
 .button.is-info {
@@ -207,6 +211,7 @@ textarea:focus {
 
 .subtitle {
   color: #262626;
+  line-height: 1.5;
 }
 
 .hero-body,
@@ -297,3 +302,6 @@ a .fa-external-link-alt {
   text-underline-offset: 2px;
 }
 
+a {
+  text-decoration-line: underline;
+}
