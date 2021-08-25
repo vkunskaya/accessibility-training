@@ -305,3 +305,47 @@ a .fa-external-link-alt {
 a {
   text-decoration-line: underline;
 }
+
+.menu-widget {
+  position: relative;
+}
+
+.menu-widget--active a {
+  color: #0a0a0a !important;
+  background-color: #fff !important;
+}
+
+.menu-widget__menu {
+  position: absolute;
+  top: 83%;
+  left: 0;
+  max-width: 100%;
+  padding-left: 12px;
+}
+
+.menu-widget__item {
+  background-color: #fff;
+}
+
+.menu-widget__link {
+  display: block;
+  padding: 12px;
+  color: #0a0a0a;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.menu-widget__link:hover,
+.menu-widget__link:focus {
+  background-color: #f8f6f6;
+}
+
+.menu-widget__separator {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ece3e3;
+}
+
+.is-shown {
+  display: block !important;
+}

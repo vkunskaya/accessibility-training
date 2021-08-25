@@ -26,34 +26,58 @@
               data-target="navbarMenu"></button>
           </div>
 
-          <nav id="navbarMenu" role="menu" class="navbar-menu" aria-label="Main navigation" tabindex="-1">
+          <nav id="navbarMenu" role="menubar" class="navbar-menu" aria-label="Main navigation" tabindex="-1">
             <ul class="navbar-end" role="none">
               <li class="navbar-item" role="none">
-                <a class="button is-white is-outlined" role="menuitem">
+                <a class="button is-white is-outlined" role="menuitem" tabindex="-1">
                   <span class="icon" aria-hidden="true">
                     <i class="fa fa-home"></i>
                   </span>
                   <span>Home</span>
                 </a>
               </li>
-              <li class="navbar-item">
-                <a class="button is-white is-outlined" href="#" role="menuitem">
+              <li class="navbar-item" role="none">
+                <a class="button is-white is-outlined" href="#" role="menuitem" tabindex="0">
                   <span class="icon" aria-hidden="true">
                     <i class="fab fa-superpowers"></i>
                   </span>
                   <span>Examples</span>
                 </a>
               </li>
-              <li class="navbar-item">
-                <a class="button is-white is-outlined" href="#" role="menuitem">
+              <li class="navbar-item menu-widget" role="none">
+                <a class="button is-white is-outlined" href="#" role="menuitem" aria-haspopup="true"
+                  aria-expanded="false" tabindex="-1">
+                  <span class="icon" aria-hidden="true">
+                    <i class="fab fa-superpowers"></i>
+                  </span>
+                  <span>Administration</span>
+                </a>
+                <ul class="menu-widget__menu is-hidden" role="menu">
+                  <li class="menu-widget__item" role="none">
+                    <a class="menu-widget__link" href="#" role="menuitem" tabindex="-1">Team Settings</a>
+                  </li>
+                  <li class="menu-widget__item" role="none">
+                    <a class="menu-widget__link" href="#" role="menuitem" tabindex="-1">Manage Your Team</a>
+                  </li>
+                  <li class="menu-widget__item" role="none">
+                    <a class="menu-widget__link" href="#" role="menuitem" tabindex="-1">Invitations</a>
+                  </li>
+                  <li class="menu-widget__item menu-widget__separator" role="menuitem" role="separator"></li>
+                  <li class="menu-widget__item" role="none">
+                    <a class="menu-widget__link" href="#" role="menuitem" tabindex="-1">Authentication</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="navbar-item" role="none">
+                <a class="button is-white is-outlined" href="#" role="menuitem" tabindex="-1">
                   <span class="icon" aria-hidden="true">
                     <i class="fa fa-book"></i>
                   </span>
                   <span>Documentation</span>
                 </a>
               </li>
-              <li class="navbar-item">
-                <a class="button is-white is-outlined" href="#" role="menuitem">
+              <li class="navbar-item" role="none">
+                <a class="button is-white is-outlined" href="#" role="menuitem" tabindex="-1">
                   <span class="icon" aria-hidden="true">
                     <i class="fab fa-github"></i>
                   </span>
@@ -106,7 +130,7 @@
         </li>
       </ul>
     </nav>
-  <p role="timer" aria-live="polite" id="update-timer">0</p>
+    <p role="timer" aria-live="polite" id="update-timer">0</p>
     <section id="maincontent" class="section" id="about" aria-labelledby="about-title">
       <div class="section-heading has-text-centered">
         <h1 class="title is-2" id="about-title">About Us</h1>
@@ -363,7 +387,8 @@
                           enim neque volutpat ac tincidunt vitae semper quis. Accumsan tortor posuere ac ut consequat
                           semper
                           viverra nam.</p>
-                        <a class="button is-link modal-button" id="image1-modal-button" role="button" data-target="modal-image1" href="#">Image modal</a>
+                        <a class="button is-link modal-button" id="image1-modal-button" role="button"
+                          data-target="modal-image1" href="#">Image modal</a>
                       </div>
                     </div>
                   </div>
@@ -385,7 +410,8 @@
                           songue.
                           Phasellus vestibulum lorem
                           sed risus.</p>
-                        <a class="button is-link modal-button" id="card-modal-button" role="button" data-target="modal-card" href="#">Modal Card</a>
+                        <a class="button is-link modal-button" id="card-modal-button" role="button"
+                          data-target="modal-card" href="#">Modal Card</a>
                       </div>
                     </div>
                   </div>
@@ -406,7 +432,8 @@
                           dignissim enim. Libero id faucibus nisl tincidunt eget nullam. Commodo viverra maecenas
                           accumsan
                           lacus vel facilisis.</p>
-                        <a class="button is-link modal-button" id="image2-modal-button" role="button" data-target="modal-image2" href="#">Image modal</a>
+                        <a class="button is-link modal-button" id="image2-modal-button" role="button"
+                          data-target="modal-image2" href="#">Image modal</a>
                       </div>
                     </div>
                   </div>

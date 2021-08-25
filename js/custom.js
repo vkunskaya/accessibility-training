@@ -113,7 +113,7 @@ function toggleTab(selectedNav, targetId) {
   };
 
     // Add or subtract depending on key pressed
-    var direction = {
+    const direction = {
       37: -1,
       39: 1,
     };
@@ -225,5 +225,197 @@ function toggleTab(selectedNav, targetId) {
   // Make a guess
   function focusLastTab () {
     tabs[tabs.length - 1].focus();
+  }
+})();
+
+(function () {
+  const keys = {
+    end: 35,
+    home: 36,
+    left: 37,
+    up: 38,
+    right: 39,
+    down: 40,
+    enter: 13,
+    space: 32,
+    esc: 27,
+  };
+
+  const direction = {
+    37: -1,
+    38: -1,
+    39: 1,
+    40: 1,
+  };
+
+  let menuHasFocus = false;
+  let isMenuVisible = false;
+  const menubar = document.querySelector('[role="menubar"]');
+  const menuRoot = document.querySelector('.menu-widget');
+  const menuLink = document.querySelector('.menu-widget a[role="menuitem"]');
+  const menu = menuRoot.querySelector('.menu-widget__menu');
+  const barItems = menubar.querySelectorAll('.navbar-item > a:first-of-type');
+  const submenuItems = menuRoot.querySelectorAll('.menu-widget__link');
+
+  barItems.forEach((item, index) => {
+    item.index = index;
+  });
+  submenuItems.forEach((item, index) => {
+    item.index = index;
+  });
+
+  menubar.addEventListener('keydown', handleBarKeydown);
+  menuRoot.addEventListener('mouseover', showMenu);
+  menuRoot.addEventListener('mouseout', hideMenu);
+
+  menuRoot.addEventListener('focus', handleFocus);
+  menuRoot.addEventListener('blur', handleBlur);
+  menuRoot.addEventListener('keyup', handleKeyUp);
+
+
+  function handleBarKeydown(event) {
+    const key = event.keyCode;
+
+    switch(key) {
+      case keys.left:
+      case keys.right:
+        switchBarItemOnArrowPress(event);
+        break;
+
+      case keys.esc:
+        if (isMenuVisible) {
+          hideMenu();
+        }
+        break;
+
+      case keys.up:
+      case keys.down: {
+        event.preventDefault();
+        if (isMenuVisible) {
+          switchSubmenuItemOnArrowPress(event);
+        }
+        break;
+      }
+
+      case keys.end:
+        event.preventDefault();
+        focusLastItem(isMenuVisible ? submenuItems : barItems);
+        break;
+      case keys.home:
+        event.preventDefault();
+        focusFirstItem(isMenuVisible ? submenuItems : barItems);
+        break;
+    }
+  }
+
+  function updateTabindex(focusedIndex) {
+    barItems.forEach((item, index) => {
+      item.setAttribute('tabindex', focusedIndex === index ? 0 : -1);
+    });
+  }
+
+  function switchBarItemOnArrowPress (event) {
+    event.stopPropagation();
+    var pressed = event.keyCode;
+
+    if (direction[pressed]) {
+      var target = event.target;
+      if (target.index !== undefined) {
+        if (barItems[target.index + direction[pressed]]) {
+          barItems[target.index + direction[pressed]].focus();
+          updateTabindex(target.index + direction[pressed]);
+        }
+        else if (pressed === keys.left) {
+          focusLastItem(barItems);
+          updateTabindex(barItems.length - 1);
+        }
+        else if (pressed === keys.right) {
+          focusFirstItem(barItems);
+          updateTabindex(0);
+        }
+
+        if (isMenuVisible) {
+          hideMenu();
+        }
+      }
+    }
+  }
+
+  function focusFirstItem (items) {
+    items[0].focus();
+  }
+
+  // Make a guess
+  function focusLastItem (items) {
+    items[items.length - 1].focus();
+  }
+
+  function showMenu(focusToLast) {
+    menu.classList.remove('is-hidden');
+    menu.classList.add('is-shown');
+    menuRoot.classList.add('menu-widget--active');
+    menuLink.setAttribute('aria-expanded', true);
+    isMenuVisible = true;
+
+    submenuItems[!focusToLast ? 0 : submenuItems.length - 1].focus();
+  }
+
+  function hideMenu() {
+    menu.classList.remove('is-shown');
+    menu.classList.add('is-hidden');
+    menuRoot.classList.remove('menu-widget--active');
+    menuLink.setAttribute('aria-expanded', false);
+    isMenuVisible = false;
+  }
+
+  function handleFocus() {
+    hasFocus = true;
+  }
+
+  function handleBlur() {
+    hasFocus = false;
+  }
+
+  function switchSubmenuItemOnArrowPress (event) {
+    var pressed = event.keyCode;
+
+    if (direction[pressed]) {
+      var target = event.target;
+      if (target.index !== undefined) {
+        if (submenuItems[target.index + direction[pressed]]) {
+          submenuItems[target.index + direction[pressed]].focus();
+        }
+        else if (pressed === keys.up) {
+          focusLastItem(submenuItems);
+        }
+        else if (pressed === keys.down) {
+          focusFirstItem(submenuItems);
+        }
+      }
+    }
+  }
+
+  function handleKeyUp(event) {
+    const key = event.keyCode;
+
+    switch(key) {
+      case keys.down:
+      case keys.space:
+      case keys.enter: {
+        if (!isMenuVisible) {
+          event.preventDefault();
+          showMenu();
+        }
+        break;
+      }
+
+      case keys.up: {
+        if (!isMenuVisible) {
+          event.preventDefault();
+          showMenu(true);
+          break;
+        }
+      }
+    }
   }
 })();
